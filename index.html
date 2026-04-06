@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffe - Programador Amador</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Script de rastreamento do GoatCounter -->
-    <script data-goatcounter="https://coffezas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { height: 100%; }
@@ -290,43 +288,69 @@
             transform: translateY(-2px);
         }
         
-        .visitor-counter {
+        /* SEÇÃO DE LINGUAGENS */
+        .tech-stack {
             background: rgba(20, 20, 20, 0.6);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(220, 38, 38, 0.15);
-            border-radius: 14px;
-            padding: 12px;
-            text-align: center;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tech-header {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            color: #a1a1aa;
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 8px;
         }
         
-        .visitor-counter span {
+        .tech-header::before {
+            content: '>';
             color: #dc2626;
-            font-weight: 700;
         }
         
-        .digital-clock {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(220, 38, 38, 0.3);
-            border-radius: 12px;
-            padding: 12px 16px;
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .tech-item {
+            background: rgba(220, 38, 38, 0.05);
+            border: 1px solid rgba(220, 38, 38, 0.1);
+            border-radius: 10px;
+            padding: 12px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        
+        .tech-item:hover {
+            background: rgba(220, 38, 38, 0.15);
+            border-color: rgba(220, 38, 38, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+        }
+        
+        .tech-icon {
+            font-size: 24px;
+            line-height: 1;
+        }
+        
+        .tech-name {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 18px;
-            font-weight: 700;
-            color: #dc2626;
-            text-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
-            z-index: 100;
-            letter-spacing: 2px;
+            font-size: 10px;
+            color: #a1a1aa;
+            font-weight: 500;
         }
         
         @media (max-width: 480px) {
@@ -334,12 +358,10 @@
             .profile-card { padding: 35px 20px; }
             .name { font-size: 32px; }
             .avatar { width: 90px; height: 90px; font-size: 36px; }
-            .digital-clock {
-                bottom: 10px;
-                right: 10px;
-                padding: 8px 12px;
-                font-size: 16px;
-            }
+            .tech-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+            .tech-item { padding: 10px 4px; }
+            .tech-icon { font-size: 20px; }
+            .tech-name { font-size: 9px; }
         }
     </style>
 </head>
@@ -386,78 +408,47 @@
             </a>
         </div>
 
-        <div class="visitor-counter">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #dc2626;">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-            <span id="visitor-count">0</span> sistemas conectados
+        <!-- SEÇÃO DE LINGUAGENS -->
+        <div class="tech-stack">
+            <div class="tech-header">linguagens usadas</div>
+            <div class="tech-grid">
+                <div class="tech-item" title="HTML5">
+                    <div class="tech-icon">🌐</div>
+                    <div class="tech-name">HTML</div>
+                </div>
+                <div class="tech-item" title="CSS3">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">CSS</div>
+                </div>
+                <div class="tech-item" title="JavaScript">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-name">JS</div>
+                </div>
+                <div class="tech-item" title="Python">
+                    <div class="tech-icon">🐍</div>
+                    <div class="tech-name">PYTHON</div>
+                </div>
+                <div class="tech-item" title="Node.js">
+                    <div class="tech-icon">🟢</div>
+                    <div class="tech-name">NODE</div>
+                </div>
+                <div class="tech-item" title="React">
+                    <div class="tech-icon">⚛️</div>
+                    <div class="tech-name">REACT</div>
+                </div>
+                <div class="tech-item" title="Git">
+                    <div class="tech-icon">📦</div>
+                    <div class="tech-name">GIT</div>
+                </div>
+                <div class="tech-item" title="SQL">
+                    <div class="tech-icon">🗄️</div>
+                    <div class="tech-name">SQL</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="digital-clock" id="clock">00:00:00</div>
-
     <script>
-        // ZERAR CONTADOR DEFINITIVAMENTE
-        localStorage.removeItem('coffe_visits');
-        sessionStorage.removeItem('session_counted');
-        
-        // CONFIGURAÇÃO
-        const GOATCOUNTER_CODE = 'coffezas';
-        
-        // Função para buscar contador usando JSONP
-        function fetchVisitorCount() {
-            const script = document.createElement('script');
-            script.src = `https://${GOATCOUNTER_CODE}.goatcounter.com/counter/TOTAL.jsonp?callback=updateCount`;
-            
-            window.updateCount = function(data) {
-                const count = data.count;
-                const counterElement = document.getElementById('visitor-count');
-                let current = 0;
-                const target = parseInt(count);
-                const increment = Math.ceil(target / 30);
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    counterElement.textContent = current.toLocaleString();
-                }, 30);
-            };
-            
-            document.head.appendChild(script);
-            script.onload = () => script.remove();
-            script.onerror = () => useLocalFallback();
-        }
-        
-        // Fallback local ZERADO (começa do 0)
-        function useLocalFallback() {
-            let count = parseInt(localStorage.getItem('coffe_visits') || '0');
-            
-            if (!sessionStorage.getItem('session_counted')) {
-                count++;
-                localStorage.setItem('coffe_visits', count);
-                sessionStorage.setItem('session_counted', 'true');
-            }
-            
-            document.getElementById('visitor-count').textContent = count.toLocaleString();
-        }
-        
-        // Tenta buscar imediatamente
-        fetchVisitorCount();
-        const checkInterval = setInterval(() => {
-            const currentValue = document.getElementById('visitor-count').textContent;
-            if (currentValue === '...' || currentValue === '0') {
-                fetchVisitorCount();
-            } else {
-                clearInterval(checkInterval);
-            }
-        }, 5000);
-
         // Efeito de digitação no nome
         const nameElement = document.getElementById('typewriter-name');
         const nameText = 'Coffe';
@@ -503,17 +494,6 @@
         }
         
         setInterval(rotateBio, 4000);
-        
-        // Relógio Digital
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
         
         // Partículas vermelhas
         const canvas = document.getElementById('particle-canvas');
