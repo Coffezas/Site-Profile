@@ -208,7 +208,7 @@
         .discord-name-simple { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; }
         .discord-stats-simple { display: flex; gap: 12px; font-size: 12px; color: #96989d; }
         
-        /* NOVOS BOTÕES: GITHUB E INSTAGRAM */
+        /* BOTÕES SOCIAIS */
         .social-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -249,8 +249,10 @@
 </head>
 <body>
     <div class="stars" id="stars"></div>
+    
     <div class="red-glow red-glow-1"></div>
     <div class="red-glow red-glow-2"></div>
+    
     <div class="red-accent red-accent-1"></div>
     <div class="red-accent red-accent-2"></div>
     <div class="red-accent red-accent-3"></div>
@@ -284,11 +286,11 @@
         </a>
 
         <div class="social-grid">
-            <a href="https://github.com/SEU-USUARIO" target="_blank" class="social-item">
+            <a href="https://github.com/Coffezas" target="_blank" class="social-item">
                 <span class="social-icon">💻</span>
                 <span>GitHub</span>
             </a>
-            <a href="https://instagram.com/SEU-USUARIO" target="_blank" class="social-item">
+            <a href="https://www.instagram.com/joao.xyl?igsh=MW1qZXZ6ZWYyMGxpdg==" target="_blank" class="social-item">
                 <span class="social-icon">📸</span>
                 <span>Instagram</span>
             </a>
@@ -296,7 +298,7 @@
     </div>
 
     <script>
-        // ESTRELAS
+        // ===== ESTRELAS =====
         const starsContainer = document.getElementById('stars');
         for (let i = 0; i < 100; i++) {
             const star = document.createElement('div');
@@ -309,7 +311,7 @@
             starsContainer.appendChild(star);
         }
 
-        // DISCORD STATS
+        // ===== DISCORD STATS =====
         let baseOnline = 13219;
         let baseTotal = 400932;
         function updateDiscordStats() {
@@ -320,12 +322,14 @@
         }
         setInterval(updateDiscordStats, 5000);
 
-        // EFEITO 3D MOUSE
+        // Efeito 3D ao mover o mouse
         document.addEventListener('mousemove', (e) => {
             const mouseX = e.clientX / window.innerWidth - 0.5;
             const mouseY = e.clientY / window.innerHeight - 0.5;
             const card = document.querySelector('.profile-card');
-            card.style.transform = `perspective(1000px) rotateY(${mouseX * 5}deg) rotateX(${-mouseY * 5}deg)`;
+            if(card) {
+                card.style.transform = `perspective(1000px) rotateY(${mouseX * 5}deg) rotateX(${-mouseY * 5}deg)`;
+            }
         });
     </script>
 </body>
