@@ -288,6 +288,49 @@
             transform: translateY(-2px);
         }
         
+        /* CONTADOR DE DIAS */
+        .days-counter {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(220, 38, 38, 0.15);
+            border-radius: 14px;
+            padding: 12px;
+            margin-bottom: 12px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .days-label {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .days-label::before {
+            content: '>';
+            color: #dc2626;
+        }
+        
+        .days-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #dc2626;
+            text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
+            line-height: 1;
+        }
+        
+        .days-text {
+            font-size: 11px;
+            color: #a1a1aa;
+            margin-top: 4px;
+        }
+        
         /* SEÇÃO DE LINGUAGENS */
         .tech-stack {
             background: rgba(20, 20, 20, 0.6);
@@ -362,6 +405,7 @@
             .tech-item { padding: 10px 4px; }
             .tech-icon { font-size: 20px; }
             .tech-name { font-size: 9px; }
+            .days-number { font-size: 24px; }
         }
     </style>
 </head>
@@ -393,6 +437,13 @@
                 <span class="status-dot"></span>
                 <span>Disponível para projetos</span>
             </div>
+        </div>
+
+        <!-- CONTADOR DE DIAS (começa em 1) -->
+        <div class="days-counter">
+            <div class="days-label">tempo de código</div>
+            <div class="days-number" id="days-count">1</div>
+            <div class="days-text">dia programando</div>
         </div>
 
         <div class="social-links">
@@ -449,6 +500,37 @@
     </div>
 
     <script>
+        // CONTADOR DE DIAS - Começa em 1 e aumenta 1 por dia
+        // Dia 1 = 06/04/2026 (hoje)
+        // Amanhã = 2, depois = 3, etc.
+        const START_DATE = '2026-04-06'; // ALTERE ESTA DATA para definir quando começou (Dia 1)
+        
+        function updateDaysCounter() {
+            const start = new Date(START_DATE);
+            const today = new Date();
+            
+            // Calcula diferença em dias
+            const diffTime = today - start;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            // +1 para começar em 1 ao invés de 0
+            const dayNumber = diffDays + 1;
+            
+            // Atualiza o número
+            const counterElement = document.getElementById('days-count');
+            counterElement.textContent = dayNumber;
+            
+            // Atualiza o texto (singular/plural)
+            const textElement = document.querySelector('.days-text');
+            if (dayNumber === 1) {
+                textElement.textContent = 'dia programando';
+            } else {
+                textElement.textContent = 'dias programando';
+            }
+        }
+        
+        updateDaysCounter();
+
         // Efeito de digitação no nome
         const nameElement = document.getElementById('typewriter-name');
         const nameText = 'Coffe';
