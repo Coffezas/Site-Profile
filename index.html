@@ -13,20 +13,21 @@ html_code = '''<!DOCTYPE html>
             box-sizing: border-box;
         }
 
-        html, body {
+        html {
             height: 100%;
-            width: 100%;
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background: #0a0a0a;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
             position: relative;
             padding: 20px;
+            margin: 0;
         }
 
         /* Estrelas no fundo */
@@ -90,7 +91,6 @@ html_code = '''<!DOCTYPE html>
             flex-direction: column;
             align-items: center;
             gap: 16px;
-            margin: 0 auto;
         }
 
         /* Card do perfil */
@@ -874,15 +874,14 @@ html_code = '''<!DOCTYPE html>
 </html>'''
 
 # Salvar o arquivo
-with open('/mnt/kimi/output/coffe_centralizado_final.html', 'w', encoding='utf-8') as f:
+with open('/mnt/kimi/output/coffe_centralizado.html', 'w', encoding='utf-8') as f:
     f.write(html_code)
 
-print("✅ Site centralizado corretamente!")
-print("📁 Arquivo salvo em: /mnt/kimi/output/coffe_centralizado_final.html")
-print("\n🎯 ALTERAÇÕES DE CENTRALIZAÇÃO:")
-print("   • html, body: height: 100%, width: 100%")
-print("   • body: display: flex, justify-content: center, align-items: center")
-print("   • .container: margin: 0 auto, align-items: center")
-print("   • Todos os cards com width: 100%")
-print("   • Textos internos alinhados corretamente")
-print("   • Centralização vertical e horizontal garantida")
+print("✅ Site centralizado corrigido!")
+print("📁 Arquivo salvo em: /mnt/kimi/output/coffe_centralizado.html")
+print("\n🎯 CORREÇÕES:")
+print("   • html { height: 100% }")
+print("   • body: min-height: 100vh, display: flex, justify-content: center, align-items: center")
+print("   • body { margin: 0 }")
+print("   • .container: align-items: center")
+print("   • Centralização garantida em todas as telas")
