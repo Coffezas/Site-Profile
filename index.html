@@ -13,21 +13,20 @@ html_code = '''<!DOCTYPE html>
             box-sizing: border-box;
         }
 
-        html {
+        html, body {
             height: 100%;
+            width: 100%;
+            overflow-x: hidden;
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background: #0a0a0a;
-            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
             position: relative;
             padding: 20px;
-            margin: 0;
         }
 
         /* Estrelas no fundo */
@@ -221,14 +220,6 @@ html_code = '''<!DOCTYPE html>
             50% { opacity: 0.5; }
         }
 
-        /* CARDS - CENTRALIZADOS */
-        .card-wrapper {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
         /* Discord Simplificado */
         .discord-simple {
             background: rgba(20, 20, 20, 0.6);
@@ -308,256 +299,6 @@ html_code = '''<!DOCTYPE html>
             font-size: 18px;
         }
 
-        /* Spotify Card */
-        .spotify-card {
-            background: rgba(20, 20, 20, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(29, 185, 84, 0.2);
-            border-radius: 14px;
-            padding: 16px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            width: 100%;
-        }
-
-        .spotify-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 14px;
-        }
-
-        .spotify-icon {
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-        }
-
-        .spotify-title {
-            flex: 1;
-            text-align: left;
-        }
-
-        .spotify-label {
-            font-size: 10px;
-            color: #1db954;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .live-dot {
-            width: 5px;
-            height: 5px;
-            background: #1db954;
-            border-radius: 50%;
-            animation: livePulse 1.5s infinite;
-        }
-
-        .live-dot.paused {
-            background: #f59e0b;
-            animation: none;
-        }
-
-        .live-dot.offline {
-            background: #ef4444;
-            animation: none;
-        }
-
-        @keyframes livePulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.3); }
-        }
-
-        .spotify-status {
-            font-size: 13px;
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        /* Conteúdo da música */
-        .spotify-content {
-            display: flex;
-            gap: 14px;
-            align-items: center;
-        }
-
-        .album-cover {
-            width: 70px;
-            height: 70px;
-            border-radius: 6px;
-            background: linear-gradient(135deg, #333 0%, #111 100%);
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-        }
-
-        .album-cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .album-cover.playing::after {
-            content: '';
-            position: absolute;
-            bottom: 6px;
-            right: 6px;
-            width: 10px;
-            height: 10px;
-            background: #1db954;
-            border-radius: 50%;
-            border: 2px solid rgba(0,0,0,0.8);
-            animation: playingPulse 1.5s infinite;
-        }
-
-        @keyframes playingPulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-        }
-
-        .track-info {
-            flex: 1;
-            min-width: 0;
-            text-align: left;
-        }
-
-        .track-name {
-            font-size: 15px;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 3px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .track-artist {
-            font-size: 12px;
-            color: #b3b3b3;
-            margin-bottom: 10px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* Barra de progresso */
-        .progress-bar-container {
-            margin-bottom: 10px;
-        }
-
-        .progress-bar-bg {
-            height: 3px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: #1db954;
-            border-radius: 2px;
-            transition: width 1s linear;
-            position: relative;
-        }
-
-        .progress-bar-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .time-display {
-            display: flex;
-            justify-content: space-between;
-            font-size: 10px;
-            color: #96989d;
-            margin-top: 4px;
-        }
-
-        /* Controles */
-        .spotify-controls {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .control-btn {
-            background: none;
-            border: none;
-            color: #b3b3b3;
-            cursor: pointer;
-            padding: 3px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .control-btn:hover {
-            color: #ffffff;
-            transform: scale(1.1);
-        }
-
-        .control-btn.play {
-            width: 28px;
-            height: 28px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: #ffffff;
-        }
-
-        .control-btn.play:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .control-btn svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .control-btn.play svg {
-            width: 12px;
-            height: 12px;
-        }
-
-        /* Estado vazio/erro */
-        .spotify-empty {
-            text-align: center;
-            padding: 20px;
-            color: #96989d;
-        }
-
-        .spotify-empty-icon {
-            font-size: 28px;
-            margin-bottom: 8px;
-            opacity: 0.5;
-        }
-
-        .error-text {
-            font-size: 11px;
-            color: #ef4444;
-            margin-top: 8px;
-        }
-
         /* Responsivo */
         @media (max-width: 480px) {
             body { padding: 15px; }
@@ -598,56 +339,27 @@ html_code = '''<!DOCTYPE html>
             </div>
         </div>
 
-        <div class="card-wrapper">
-            <!-- Discord -->
-            <a href="https://discord.gg/platformdestroyer" target="_blank" class="discord-simple">
-                <div class="discord-icon-simple">💬</div>
-                <div class="discord-info">
-                    <div class="discord-name-simple">Platform Destroyer</div>
-                    <div class="discord-stats-simple">
-                        <span class="discord-stat">
-                            <span class="dot-online"></span>
-                            <span id="discordOnline">13.219</span> online
-                        </span>
-                        <span class="discord-stat">
-                            <span class="dot-total"></span>
-                            <span id="discordTotal">400.932</span> membros
-                        </span>
-                    </div>
-                </div>
-                <div class="discord-arrow">→</div>
-            </a>
-
-            <!-- Spotify -->
-            <div class="spotify-card" id="spotifyCard">
-                <div class="spotify-header">
-                    <div class="spotify-icon">🎵</div>
-                    <div class="spotify-title">
-                        <div class="spotify-label" id="spotifyLabel">
-                            <span class="live-dot" id="liveDot"></span>
-                            <span id="labelText">Carregando...</span>
-                        </div>
-                        <div class="spotify-status" id="spotifyStatus">Spotify</div>
-                    </div>
-                </div>
-
-                <div id="spotifyContent">
-                    <div class="spotify-empty">
-                        <div class="spotify-empty-icon">🎧</div>
-                        <div>Carregando música...</div>
-                    </div>
+        <!-- Discord -->
+        <a href="https://discord.gg/platformdestroyer" target="_blank" class="discord-simple">
+            <div class="discord-icon-simple">💬</div>
+            <div class="discord-info">
+                <div class="discord-name-simple">Platform Destroyer</div>
+                <div class="discord-stats-simple">
+                    <span class="discord-stat">
+                        <span class="dot-online"></span>
+                        <span id="discordOnline">13.219</span> online
+                    </span>
+                    <span class="discord-stat">
+                        <span class="dot-total"></span>
+                        <span id="discordTotal">400.932</span> membros
+                    </span>
                 </div>
             </div>
-        </div>
+            <div class="discord-arrow">→</div>
+        </a>
     </div>
 
     <script>
-        // ===== TOKEN DO SPOTIFY =====
-        const SPOTIFY_TOKEN = 'BQD9TSVVdCMVtJWn-fjKzt65HfcS2wxquPX_FCB7kW5Io3c1UWFmQDWh_ObupPQdVpwuembZxKoVy9SOjdTC3Q1R6M6j9n-ToIXp78ky_rb17-nyEl7k_FAVYSzusvywetlgv4x9sTcxe0nOFIGdOqmNNjTagvXqNBDhGLPeFB6H0DBUMT_1YhoFDoOjQqR6XF7p6eXvs1HuGcViCjVePo_5Jbm1WIwSJDSekAMl73yGvgKxvrzbUIuU-M22cYTURc2Qd_6_pLgnon_Q0-lK5dvjuRrhklSlI6Ae8T85pzhUwEeziPMTOCh46X34dMlhVqMRCYAFHQ';
-
-        let updateInterval = null;
-        let isPlaying = false;
-
         // ===== ESTRELAS =====
         const starsContainer = document.getElementById('stars');
         for (let i = 0; i < 100; i++) {
@@ -676,192 +388,6 @@ html_code = '''<!DOCTYPE html>
         }
         setInterval(updateDiscordStats, 5000);
 
-        // ===== SPOTIFY API =====
-        async function fetchWebApi(endpoint, method = 'GET', body = null) {
-            const options = {
-                method: method,
-                headers: {
-                    'Authorization': `Bearer ${SPOTIFY_TOKEN}`,
-                    'Content-Type': 'application/json'
-                }
-            };
-            
-            if (body) {
-                options.body = JSON.stringify(body);
-            }
-
-            try {
-                const res = await fetch(`https://api.spotify.com/${endpoint}`, options);
-                
-                if (res.status === 204) {
-                    return null;
-                }
-                
-                if (!res.ok) {
-                    throw new Error(`HTTP ${res.status}`);
-                }
-                
-                return await res.json();
-            } catch (error) {
-                console.error('Erro na API:', error);
-                return null;
-            }
-        }
-
-        async function getCurrentlyPlaying() {
-            return await fetchWebApi('v1/me/player/currently-playing');
-        }
-
-        async function getRecentlyPlayed() {
-            const data = await fetchWebApi('v1/me/player/recently-played?limit=1');
-            return data?.items?.[0]?.track || null;
-        }
-
-        function formatTime(ms) {
-            const seconds = Math.floor(ms / 1000);
-            const mins = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-            return `${mins}:${secs.toString().padStart(2, '0')}`;
-        }
-
-        async function updateSpotifyDisplay() {
-            const content = document.getElementById('spotifyContent');
-            const status = document.getElementById('spotifyStatus');
-            const labelText = document.getElementById('labelText');
-            const liveDot = document.getElementById('liveDot');
-
-            try {
-                const current = await getCurrentlyPlaying();
-
-                let track, progress, duration, playing;
-
-                if (current && current.is_playing && current.item) {
-                    track = current.item;
-                    progress = current.progress_ms;
-                    duration = track.duration_ms;
-                    playing = true;
-                    isPlaying = true;
-                    
-                    status.textContent = 'Tocando agora';
-                    labelText.textContent = 'Ao Vivo';
-                    liveDot.classList.remove('paused', 'offline');
-                } else if (current && current.item) {
-                    track = current.item;
-                    progress = current.progress_ms;
-                    duration = track.duration_ms;
-                    playing = false;
-                    isPlaying = false;
-                    
-                    status.textContent = 'Pausado';
-                    labelText.textContent = 'Pausado';
-                    liveDot.classList.add('paused');
-                    liveDot.classList.remove('offline');
-                } else {
-                    const recent = await getRecentlyPlayed();
-                    
-                    if (recent) {
-                        track = recent;
-                        progress = 0;
-                        duration = track.duration_ms;
-                        playing = false;
-                        isPlaying = false;
-                        
-                        status.textContent = 'Última tocada';
-                        labelText.textContent = 'Offline';
-                        liveDot.classList.add('offline');
-                        liveDot.classList.remove('paused');
-                    } else {
-                        status.textContent = 'Spotify';
-                        labelText.textContent = 'Sem dados';
-                        liveDot.classList.add('offline');
-                        content.innerHTML = `
-                            <div class="spotify-empty">
-                                <div class="spotify-empty-icon">🎵</div>
-                                <div>Nenhuma música encontrada</div>
-                            </div>
-                        `;
-                        return;
-                    }
-                }
-
-                const progressPercent = (progress / duration) * 100;
-                const albumImage = track.album.images[0]?.url || '';
-
-                content.innerHTML = `
-                    <div class="spotify-content">
-                        <div class="album-cover ${playing ? 'playing' : ''}">
-                            <img src="${albumImage}" alt="Album" 
-                                 onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #333 0%, #111 100%)'">
-                        </div>
-                        <div class="track-info">
-                            <div class="track-name">${track.name}</div>
-                            <div class="track-artist">${track.artists.map(a => a.name).join(', ')}</div>
-                            
-                            <div class="progress-bar-container">
-                                <div class="progress-bar-bg">
-                                    <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
-                                </div>
-                                <div class="time-display">
-                                    <span>${formatTime(progress)}</span>
-                                    <span>${formatTime(duration)}</span>
-                                </div>
-                            </div>
-
-                            <div class="spotify-controls">
-                                <button class="control-btn" onclick="previousTrack()">
-                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-                                </button>
-                                <button class="control-btn play" onclick="togglePlay()">
-                                    <svg viewBox="0 0 24 24" fill="currentColor">
-                                        ${playing ? 
-                                            '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>' : 
-                                            '<path d="M8 5v14l11-7z"/>'
-                                        }
-                                    </svg>
-                                </button>
-                                <button class="control-btn" onclick="nextTrack()">
-                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            } catch (error) {
-                console.error('Erro:', error);
-                status.textContent = 'Erro';
-                labelText.textContent = 'Offline';
-                liveDot.classList.add('offline');
-                content.innerHTML = `
-                    <div class="spotify-empty">
-                        <div class="spotify-empty-icon">⚠️</div>
-                        <div>Erro ao carregar</div>
-                        <div class="error-text">Token pode ter expirado</div>
-                    </div>
-                `;
-            }
-        }
-
-        // Controles
-        async function togglePlay() {
-            const endpoint = isPlaying ? 'v1/me/player/pause' : 'v1/me/player/play';
-            await fetchWebApi(endpoint, 'PUT');
-            setTimeout(updateSpotifyDisplay, 500);
-        }
-
-        async function nextTrack() {
-            await fetchWebApi('v1/me/player/next', 'POST');
-            setTimeout(updateSpotifyDisplay, 1000);
-        }
-
-        async function previousTrack() {
-            await fetchWebApi('v1/me/player/previous', 'POST');
-            setTimeout(updateSpotifyDisplay, 1000);
-        }
-
-        // Iniciar
-        updateSpotifyDisplay();
-        updateInterval = setInterval(updateSpotifyDisplay, 3000);
-
         // Efeito 3D
         document.addEventListener('mousemove', (e) => {
             const mouseX = e.clientX / window.innerWidth - 0.5;
@@ -874,14 +400,14 @@ html_code = '''<!DOCTYPE html>
 </html>'''
 
 # Salvar o arquivo
-with open('/mnt/kimi/output/coffe_centralizado.html', 'w', encoding='utf-8') as f:
+with open('/mnt/kimi/output/coffe_final.html', 'w', encoding='utf-8') as f:
     f.write(html_code)
 
-print("✅ Site centralizado corrigido!")
-print("📁 Arquivo salvo em: /mnt/kimi/output/coffe_centralizado.html")
-print("\n🎯 CORREÇÕES:")
-print("   • html { height: 100% }")
-print("   • body: min-height: 100vh, display: flex, justify-content: center, align-items: center")
-print("   • body { margin: 0 }")
-print("   • .container: align-items: center")
-print("   • Centralização garantida em todas as telas")
+print("✅ Spotify removido!")
+print("📁 Arquivo salvo em: /mnt/kimi/output/coffe_final.html")
+print("\n🎯 SITE FINAL:")
+print("   • Perfil centralizado: Coffe + Programador Amador")
+print("   • Discord: Platform Destroyer com stats ao vivo")
+print("   • Tema dark com estrelas e detalhes vermelhos")
+print("   • Totalmente centralizado na tela")
+print("   • Sem Spotify")
