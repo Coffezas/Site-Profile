@@ -80,7 +80,7 @@
         .red-accent-3 { bottom: 15%; left: 20%; transform: rotate(60deg); }
         .red-accent-4 { bottom: 25%; right: 10%; transform: rotate(-45deg); }
 
-        /* Container principal - CENTRALIZADO */
+        /* Container principal */
         .container {
             position: relative;
             z-index: 10;
@@ -99,11 +99,10 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            box-shadow: 
-                0 25px 50px -12px rgba(0, 0, 0, 0.5),
-                0 0 0 1px rgba(220, 38, 38, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             width: 100%;
             margin-bottom: 16px;
+            transition: transform 0.1s ease-out;
         }
 
         .profile-card::before {
@@ -135,8 +134,6 @@
             font-size: 40px;
             color: #dc2626;
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(220, 38, 38, 0.2);
             margin: 0 auto;
         }
 
@@ -144,10 +141,7 @@
 
         .avatar-ring {
             position: absolute;
-            top: -6px;
-            left: -6px;
-            right: -6px;
-            bottom: -6px;
+            top: -6px; left: -6px; right: -6px; bottom: -6px;
             border-radius: 50%;
             border: 2px solid rgba(220, 38, 38, 0.2);
             animation: pulse 2s infinite;
@@ -158,32 +152,10 @@
             50% { transform: scale(1.05); opacity: 0.8; }
         }
 
-        .name {
-            font-size: 36px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-
-        .bio {
-            font-size: 15px;
-            color: #a1a1aa;
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .bio::before {
-            content: '';
-            width: 4px;
-            height: 4px;
-            background: #dc2626;
-            border-radius: 50%;
-        }
-
+        .name { font-size: 36px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .bio { font-size: 15px; color: #a1a1aa; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .bio::before { content: ''; width: 4px; height: 4px; background: #dc2626; border-radius: 50%; }
+        
         .divider {
             width: 50px;
             height: 2px;
@@ -202,23 +174,12 @@
             border-radius: 20px;
             font-size: 12px;
             color: #ef4444;
-            font-weight: 500;
         }
 
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            background: #dc2626;
-            border-radius: 50%;
-            animation: blink 2s infinite;
-        }
+        .status-dot { width: 6px; height: 6px; background: #dc2626; border-radius: 50%; animation: blink 2s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Discord Simplificado */
+        /* Discord */
         .discord-simple {
             background: rgba(20, 20, 20, 0.6);
             backdrop-filter: blur(20px);
@@ -230,99 +191,72 @@
             gap: 14px;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .discord-simple:hover { border-color: rgba(88, 101, 242, 0.5); transform: translateY(-2px); }
+
+        .discord-icon-simple {
+            width: 44px; height: 44px;
+            background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; font-size: 20px;
+        }
+
+        .discord-info { flex: 1; text-align: left; }
+        .discord-name-simple { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+        .discord-stats-simple { display: flex; gap: 12px; font-size: 12px; color: #96989d; }
+        
+        /* NOVOS BOTÕES: GITHUB E INSTAGRAM */
+        .social-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
             width: 100%;
         }
 
-        .discord-simple:hover {
-            border-color: rgba(88, 101, 242, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(88, 101, 242, 0.15);
-        }
-
-        .discord-icon-simple {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
-            border-radius: 10px;
+        .social-item {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        .discord-info {
-            flex: 1;
-            text-align: left;
-        }
-
-        .discord-name-simple {
-            font-size: 15px;
-            font-weight: 600;
+            gap: 10px;
+            text-decoration: none;
             color: #ffffff;
-            margin-bottom: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
-        .discord-stats-simple {
-            display: flex;
-            gap: 12px;
-            font-size: 12px;
-            color: #96989d;
+        .social-item:hover {
+            border-color: rgba(220, 38, 38, 0.4);
+            background: rgba(220, 38, 38, 0.05);
+            transform: translateY(-2px);
         }
 
-        .discord-stat {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
+        .social-icon { font-size: 18px; }
 
-        .dot-online {
-            width: 5px;
-            height: 5px;
-            background: #3ba55d;
-            border-radius: 50%;
-            box-shadow: 0 0 5px #3ba55d;
-        }
-
-        .dot-total {
-            width: 5px;
-            height: 5px;
-            background: #96989d;
-            border-radius: 50%;
-        }
-
-        .discord-arrow {
-            color: #96989d;
-            font-size: 18px;
-        }
-
-        /* Responsivo */
         @media (max-width: 480px) {
-            body { padding: 15px; }
-            .container { max-width: 100%; }
-            .profile-card { padding: 35px 20px; }
             .name { font-size: 32px; }
-            .avatar { width: 90px; height: 90px; font-size: 36px; }
+            .social-grid { gap: 8px; }
         }
     </style>
 </head>
 <body>
-    <!-- Estrelas -->
     <div class="stars" id="stars"></div>
-    
-    <!-- Glows vermelhos -->
     <div class="red-glow red-glow-1"></div>
     <div class="red-glow red-glow-2"></div>
-    
-    <!-- Detalhes vermelhos -->
     <div class="red-accent red-accent-1"></div>
     <div class="red-accent red-accent-2"></div>
     <div class="red-accent red-accent-3"></div>
     <div class="red-accent red-accent-4"></div>
 
     <div class="container">
-        <!-- Perfil -->
         <div class="profile-card">
             <div class="avatar-container">
                 <div class="avatar-ring"></div>
@@ -337,28 +271,32 @@
             </div>
         </div>
 
-        <!-- Discord -->
         <a href="https://discord.gg/platformdestroyer" target="_blank" class="discord-simple">
             <div class="discord-icon-simple">💬</div>
             <div class="discord-info">
                 <div class="discord-name-simple">Platform Destroyer</div>
                 <div class="discord-stats-simple">
-                    <span class="discord-stat">
-                        <span class="dot-online"></span>
-                        <span id="discordOnline">13.219</span> online
-                    </span>
-                    <span class="discord-stat">
-                        <span class="dot-total"></span>
-                        <span id="discordTotal">400.932</span> membros
-                    </span>
+                    <span style="display:flex; align-items:center; gap:4px;"><span style="width:5px;height:5px;background:#3ba55d;border-radius:50%"></span> <span id="discordOnline">13.219</span> online</span>
+                    <span style="display:flex; align-items:center; gap:4px;"><span style="width:5px;height:5px;background:#96989d;border-radius:50%"></span> <span id="discordTotal">400.932</span> membros</span>
                 </div>
             </div>
-            <div class="discord-arrow">→</div>
+            <div style="color:#96989d">→</div>
         </a>
+
+        <div class="social-grid">
+            <a href="https://github.com/SEU-USUARIO" target="_blank" class="social-item">
+                <span class="social-icon">💻</span>
+                <span>GitHub</span>
+            </a>
+            <a href="https://instagram.com/SEU-USUARIO" target="_blank" class="social-item">
+                <span class="social-icon">📸</span>
+                <span>Instagram</span>
+            </a>
+        </div>
     </div>
 
     <script>
-        // ===== ESTRELAS =====
+        // ESTRELAS
         const starsContainer = document.getElementById('stars');
         for (let i = 0; i < 100; i++) {
             const star = document.createElement('div');
@@ -371,22 +309,18 @@
             starsContainer.appendChild(star);
         }
 
-        // ===== DISCORD =====
+        // DISCORD STATS
         let baseOnline = 13219;
         let baseTotal = 400932;
-
         function updateDiscordStats() {
             const variation = Math.floor(Math.random() * 20) - 10;
             const onlineVariation = Math.floor(Math.random() * 100) - 50;
-            
-            document.getElementById('discordOnline').textContent = 
-                (baseOnline + onlineVariation).toLocaleString('pt-BR');
-            document.getElementById('discordTotal').textContent = 
-                (baseTotal + variation).toLocaleString('pt-BR');
+            document.getElementById('discordOnline').textContent = (baseOnline + onlineVariation).toLocaleString('pt-BR');
+            document.getElementById('discordTotal').textContent = (baseTotal + variation).toLocaleString('pt-BR');
         }
         setInterval(updateDiscordStats, 5000);
 
-        // Efeito 3D
+        // EFEITO 3D MOUSE
         document.addEventListener('mousemove', (e) => {
             const mouseX = e.clientX / window.innerWidth - 0.5;
             const mouseY = e.clientY / window.innerHeight - 0.5;
