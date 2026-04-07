@@ -20,7 +20,34 @@
             overflow: hidden;
         }
         
-        /* BOOT SEQUENCE - TELA INICIAL */
+        /* IMAGEM DE FUNDO - NOME EXATO DA SUA IMAGEM */
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('4e0a552fe19442e78386aeb48330da74.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+            opacity: 0.25;
+            filter: blur(0px) brightness(0.8);
+        }
+        
+        /* OVERLAY ESCURO */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.85) 0%, rgba(10, 10, 10, 0.6) 50%, rgba(10, 10, 10, 0.85) 100%);
+            z-index: 1;
+        }
+        
+        /* BOOT SEQUENCE */
         #boot-screen {
             position: fixed;
             top: 0;
@@ -46,26 +73,12 @@
             animation: boot-appear 0.3s ease forwards;
         }
         
-        .boot-line.success::after {
-            content: ' [OK]';
-            color: #10b981;
-        }
-        
-        .boot-line.error::after {
-            content: ' [FAIL]';
-            color: #ef4444;
-        }
-        
-        .boot-line.warning::after {
-            content: ' [WARN]';
-            color: #f59e0b;
-        }
+        .boot-line.success::after { content: ' [OK]'; color: #10b981; }
+        .boot-line.error::after { content: ' [FAIL]'; color: #ef4444; }
+        .boot-line.warning::after { content: ' [WARN]'; color: #f59e0b; }
         
         @keyframes boot-appear {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            to { opacity: 1; transform: translateX(0); }
         }
         
         .boot-cursor {
@@ -107,11 +120,15 @@
             opacity: 0;
         }
         
-        /* CONTEÚDO PRINCIPAL (inicia escondido) */
+        /* CONTEÚDO PRINCIPAL */
         #main-content {
             opacity: 0;
             transform: scale(0.95);
             transition: all 0.5s ease;
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 380px;
         }
         
         #main-content.show {
@@ -126,7 +143,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
+            z-index: 2;
         }
         
         .stars {
@@ -134,7 +151,7 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 0;
+            z-index: 3;
         }
         .star {
             position: absolute;
@@ -153,7 +170,7 @@
             background: radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
-            z-index: 0;
+            z-index: 3;
         }
         .red-glow-1 { top: -200px; left: -200px; }
         .red-glow-2 { bottom: -200px; right: -200px; }
@@ -162,18 +179,17 @@
             position: relative;
             z-index: 10;
             width: 100%;
-            max-width: 380px;
         }
         
         .profile-card {
-            background: rgba(20, 20, 20, 0.6);
+            background: rgba(20, 20, 20, 0.75);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
             padding: 40px 30px;
             text-align: center;
             margin-bottom: 16px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(220, 38, 38, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(220, 38, 38, 0.2);
             position: relative;
         }
         
@@ -192,7 +208,7 @@
             justify-content: center;
             font-size: 40px;
             color: #dc2626;
-            box-shadow: 0 0 30px rgba(220, 38, 38, 0.2);
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
         }
         .avatar::before { content: '☕'; }
         .avatar-ring {
@@ -330,8 +346,8 @@
             align-items: center;
             gap: 6px;
             padding: 6px 14px;
-            background: rgba(220, 38, 38, 0.1);
-            border: 1px solid rgba(220, 38, 38, 0.2);
+            background: rgba(220, 38, 38, 0.15);
+            border: 1px solid rgba(220, 38, 38, 0.3);
             border-radius: 20px;
             font-size: 12px;
             color: #ef4444;
@@ -355,7 +371,7 @@
         }
         .social-btn {
             flex: 1;
-            background: rgba(20, 20, 20, 0.6);
+            background: rgba(20, 20, 20, 0.75);
             backdrop-filter: blur(20px);
             border-radius: 14px;
             padding: 14px;
@@ -365,33 +381,33 @@
             gap: 8px;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
             font-size: 14px;
             font-weight: 600;
             color: #ffffff;
         }
         .social-btn.github {
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
         .social-btn.github:hover {
-            border-color: rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
             transform: translateY(-2px);
         }
         .social-btn.instagram {
-            border: 1px solid rgba(225, 48, 108, 0.2);
+            border: 1px solid rgba(225, 48, 108, 0.3);
         }
         .social-btn.instagram:hover {
-            border-color: rgba(225, 48, 108, 0.5);
-            background: linear-gradient(135deg, rgba(225, 48, 108, 0.1) 0%, rgba(88, 81, 219, 0.1) 100%);
+            border-color: rgba(225, 48, 108, 0.6);
+            background: linear-gradient(135deg, rgba(225, 48, 108, 0.15) 0%, rgba(88, 81, 219, 0.15) 100%);
             transform: translateY(-2px);
         }
         
         /* CONTADOR DE DIAS */
         .days-counter {
-            background: rgba(20, 20, 20, 0.6);
+            background: rgba(20, 20, 20, 0.75);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(220, 38, 38, 0.15);
+            border: 1px solid rgba(220, 38, 38, 0.2);
             border-radius: 14px;
             padding: 12px;
             margin-bottom: 12px;
@@ -420,7 +436,7 @@
             font-size: 28px;
             font-weight: 700;
             color: #dc2626;
-            text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
+            text-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
             line-height: 1;
         }
         
@@ -432,12 +448,12 @@
         
         /* SEÇÃO DE LINGUAGENS */
         .tech-stack {
-            background: rgba(20, 20, 20, 0.6);
+            background: rgba(20, 20, 20, 0.75);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(220, 38, 38, 0.15);
+            border: 1px solid rgba(220, 38, 38, 0.2);
             border-radius: 24px;
             padding: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
         }
         
         .tech-header {
@@ -464,8 +480,8 @@
         }
         
         .tech-item {
-            background: rgba(220, 38, 38, 0.05);
-            border: 1px solid rgba(220, 38, 38, 0.1);
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.15);
             border-radius: 10px;
             padding: 12px 8px;
             display: flex;
@@ -477,10 +493,10 @@
         }
         
         .tech-item:hover {
-            background: rgba(220, 38, 38, 0.15);
+            background: rgba(220, 38, 38, 0.2);
             border-color: rgba(220, 38, 38, 0.4);
             transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
         }
         
         .tech-icon {
@@ -511,6 +527,10 @@
     </style>
 </head>
 <body>
+    <!-- IMAGEM DE FUNDO -->
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
+    
     <!-- BOOT SEQUENCE -->
     <div id="boot-screen">
         <div class="boot-line" style="animation-delay: 0.1s;">> BIOS_DATE: 07/04/2026</div>
@@ -624,7 +644,7 @@
     </div>
 
     <script>
-        // BOOT SEQUENCE - Esconde tela de boot após 4 segundos
+        // BOOT SEQUENCE
         setTimeout(() => {
             const bootScreen = document.getElementById('boot-screen');
             const mainContent = document.getElementById('main-content');
@@ -635,8 +655,6 @@
             setTimeout(() => {
                 bootScreen.style.display = 'none';
                 mainContent.classList.add('show');
-                
-                // Inicia efeitos do conteúdo principal
                 initMainContent();
             }, 500);
         }, 4000);
@@ -652,11 +670,8 @@
                 const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
                 const dayNumber = diffDays + 1;
                 
-                const counterElement = document.getElementById('days-count');
-                counterElement.textContent = dayNumber;
-                
-                const textElement = document.querySelector('.days-text');
-                textElement.textContent = dayNumber === 1 ? 'dia programando' : 'dias programando';
+                document.getElementById('days-count').textContent = dayNumber;
+                document.querySelector('.days-text').textContent = dayNumber === 1 ? 'dia programando' : 'dias programando';
             }
             updateDaysCounter();
 
@@ -671,27 +686,16 @@
                     charIndex++;
                     setTimeout(typeWriter, 150);
                 } else {
-                    setInterval(triggerGlitch, 8000);
+                    setInterval(() => {
+                        nameElement.classList.add('glitch-active');
+                        setTimeout(() => nameElement.classList.remove('glitch-active'), 300);
+                    }, 8000);
                 }
             }
-            
-            function triggerGlitch() {
-                nameElement.classList.add('glitch-active');
-                setTimeout(() => {
-                    nameElement.classList.remove('glitch-active');
-                }, 300);
-            }
-            
             setTimeout(typeWriter, 500);
             
             // Bio dinâmica
-            const bios = [
-                'Programador Amador',
-                'Platform Destroyer',
-                'Café > Sleep',
-                'if(coffee) { code(); }',
-                '404_sleep_not_found'
-            ];
+            const bios = ['Programador Amador', 'Platform Destroyer', 'Café > Sleep', 'if(coffee) { code(); }', '404_sleep_not_found'];
             let bioIndex = 0;
             const bioElement = document.getElementById('dynamic-bio');
             
@@ -703,7 +707,6 @@
                     bioElement.classList.remove('fade-out');
                 }, 500);
             }
-            
             setInterval(rotateBio, 4000);
             
             // Partículas vermelhas
