@@ -20,6 +20,105 @@
             overflow: hidden;
         }
         
+        /* BOOT SEQUENCE - TELA INICIAL */
+        #boot-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .boot-line {
+            color: #dc2626;
+            font-size: 14px;
+            margin-bottom: 8px;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: boot-appear 0.3s ease forwards;
+        }
+        
+        .boot-line.success::after {
+            content: ' [OK]';
+            color: #10b981;
+        }
+        
+        .boot-line.error::after {
+            content: ' [FAIL]';
+            color: #ef4444;
+        }
+        
+        .boot-line.warning::after {
+            content: ' [WARN]';
+            color: #f59e0b;
+        }
+        
+        @keyframes boot-appear {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .boot-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: #dc2626;
+            animation: blink 0.5s infinite;
+            margin-left: 4px;
+        }
+        
+        .boot-progress {
+            width: 300px;
+            height: 4px;
+            background: rgba(220, 38, 38, 0.2);
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
+            opacity: 0;
+            animation: boot-appear 0.3s ease forwards;
+        }
+        
+        .boot-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #dc2626, #ef4444);
+            width: 0%;
+            animation: progress-fill 2s ease-out forwards;
+            animation-delay: 1.5s;
+        }
+        
+        @keyframes progress-fill {
+            to { width: 100%; }
+        }
+        
+        .boot-done {
+            margin-top: 20px;
+            color: #10b981;
+            font-size: 14px;
+            opacity: 0;
+        }
+        
+        /* CONTEÚDO PRINCIPAL (inicia escondido) */
+        #main-content {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.5s ease;
+        }
+        
+        #main-content.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
         #particle-canvas {
             position: fixed;
             top: 0;
@@ -406,257 +505,288 @@
             .tech-icon { font-size: 20px; }
             .tech-name { font-size: 9px; }
             .days-number { font-size: 24px; }
+            .boot-line { font-size: 12px; }
+            .boot-progress { width: 250px; }
         }
     </style>
 </head>
 <body>
-    <canvas id="particle-canvas"></canvas>
-    <div class="stars" id="stars"></div>
-    <div class="red-glow red-glow-1"></div>
-    <div class="red-glow red-glow-2"></div>
-
-    <div class="container">
-        <div class="profile-card">
-            <div class="avatar-container">
-                <div class="avatar-ring"></div>
-                <div class="avatar"></div>
-            </div>
-            
-            <div class="name-container">
-                <h1 class="name" id="typewriter-name" data-text="Coffe"></h1>
-                <span class="cursor" id="cursor"></span>
-            </div>
-            
-            <div class="bio-container">
-                <p class="bio" id="dynamic-bio">Programador Amador</p>
-            </div>
-            
-            <div class="divider"></div>
-            
-            <div class="status">
-                <span class="status-dot"></span>
-                <span>Disponível para projetos</span>
-            </div>
+    <!-- BOOT SEQUENCE -->
+    <div id="boot-screen">
+        <div class="boot-line" style="animation-delay: 0.1s;">> BIOS_DATE: 07/04/2026</div>
+        <div class="boot-line" style="animation-delay: 0.3s;">> CPU: COFFE_PROCESSOR_V1</div>
+        <div class="boot-line" style="animation-delay: 0.5s;">> MEM: 64TB CAFFEINE_MEMORY</div>
+        <div class="boot-line success" style="animation-delay: 0.7s;">> CHECKING_SYSTEM_INTEGRITY</div>
+        <div class="boot-line success" style="animation-delay: 0.9s;">> LOADING_KERNEL_COFFE</div>
+        <div class="boot-line warning" style="animation-delay: 1.1s;">> DETECTED_HIGH_CAFFEINE_LEVELS</div>
+        <div class="boot-line" style="animation-delay: 1.3s;">> MOUNTING_FILESYSTEM...</div>
+        <div class="boot-line success" style="animation-delay: 1.5s;">> CONNECTING_TO_MATRIX</div>
+        
+        <div class="boot-progress" style="animation-delay: 1.6s;">
+            <div class="boot-progress-bar"></div>
         </div>
-
-        <!-- CONTADOR DE DIAS (começa em 1) -->
-        <div class="days-counter">
-            <div class="days-label">tempo de código</div>
-            <div class="days-number" id="days-count">1</div>
-            <div class="days-text">dia programando</div>
+        
+        <div class="boot-done" id="boot-done" style="animation: boot-appear 0.3s ease forwards; animation-delay: 3.5s;">
+            > SYSTEM_READY<span class="boot-cursor"></span>
         </div>
+    </div>
 
-        <div class="social-links">
-            <a href="https://github.com/coffezas" target="_blank" class="social-btn github">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                <span>GitHub</span>
-            </a>
-            <a href="https://instagram.com/seuusername" target="_blank" class="social-btn instagram">
-                <span style="font-size: 18px;">📷</span>
-                <span>Instagram</span>
-            </a>
-        </div>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div id="main-content">
+        <canvas id="particle-canvas"></canvas>
+        <div class="stars" id="stars"></div>
+        <div class="red-glow red-glow-1"></div>
+        <div class="red-glow red-glow-2"></div>
 
-        <!-- SEÇÃO DE LINGUAGENS -->
-        <div class="tech-stack">
-            <div class="tech-header">linguagens usadas</div>
-            <div class="tech-grid">
-                <div class="tech-item" title="HTML5">
-                    <div class="tech-icon">🌐</div>
-                    <div class="tech-name">HTML</div>
+        <div class="container">
+            <div class="profile-card">
+                <div class="avatar-container">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar"></div>
                 </div>
-                <div class="tech-item" title="CSS3">
-                    <div class="tech-icon">🎨</div>
-                    <div class="tech-name">CSS</div>
+                
+                <div class="name-container">
+                    <h1 class="name" id="typewriter-name" data-text="Coffe"></h1>
+                    <span class="cursor" id="cursor"></span>
                 </div>
-                <div class="tech-item" title="JavaScript">
-                    <div class="tech-icon">⚡</div>
-                    <div class="tech-name">JS</div>
+                
+                <div class="bio-container">
+                    <p class="bio" id="dynamic-bio">Programador Amador</p>
                 </div>
-                <div class="tech-item" title="Python">
-                    <div class="tech-icon">🐍</div>
-                    <div class="tech-name">PYTHON</div>
+                
+                <div class="divider"></div>
+                
+                <div class="status">
+                    <span class="status-dot"></span>
+                    <span>Disponível para projetos</span>
                 </div>
-                <div class="tech-item" title="Node.js">
-                    <div class="tech-icon">🟢</div>
-                    <div class="tech-name">NODE</div>
-                </div>
-                <div class="tech-item" title="React">
-                    <div class="tech-icon">⚛️</div>
-                    <div class="tech-name">REACT</div>
-                </div>
-                <div class="tech-item" title="Git">
-                    <div class="tech-icon">📦</div>
-                    <div class="tech-name">GIT</div>
-                </div>
-                <div class="tech-item" title="SQL">
-                    <div class="tech-icon">🗄️</div>
-                    <div class="tech-name">SQL</div>
+            </div>
+
+            <!-- CONTADOR DE DIAS -->
+            <div class="days-counter">
+                <div class="days-label">tempo de código</div>
+                <div class="days-number" id="days-count">2</div>
+                <div class="days-text">dias programando</div>
+            </div>
+
+            <div class="social-links">
+                <a href="https://github.com/coffezas" target="_blank" class="social-btn github">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://instagram.com/seuusername" target="_blank" class="social-btn instagram">
+                    <span style="font-size: 18px;">📷</span>
+                    <span>Instagram</span>
+                </a>
+            </div>
+
+            <!-- SEÇÃO DE LINGUAGENS -->
+            <div class="tech-stack">
+                <div class="tech-header">linguagens usadas</div>
+                <div class="tech-grid">
+                    <div class="tech-item" title="HTML5">
+                        <div class="tech-icon">🌐</div>
+                        <div class="tech-name">HTML</div>
+                    </div>
+                    <div class="tech-item" title="CSS3">
+                        <div class="tech-icon">🎨</div>
+                        <div class="tech-name">CSS</div>
+                    </div>
+                    <div class="tech-item" title="JavaScript">
+                        <div class="tech-icon">⚡</div>
+                        <div class="tech-name">JS</div>
+                    </div>
+                    <div class="tech-item" title="Python">
+                        <div class="tech-icon">🐍</div>
+                        <div class="tech-name">PYTHON</div>
+                    </div>
+                    <div class="tech-item" title="Node.js">
+                        <div class="tech-icon">🟢</div>
+                        <div class="tech-name">NODE</div>
+                    </div>
+                    <div class="tech-item" title="React">
+                        <div class="tech-icon">⚛️</div>
+                        <div class="tech-name">REACT</div>
+                    </div>
+                    <div class="tech-item" title="Git">
+                        <div class="tech-icon">📦</div>
+                        <div class="tech-name">GIT</div>
+                    </div>
+                    <div class="tech-item" title="SQL">
+                        <div class="tech-icon">🗄️</div>
+                        <div class="tech-name">SQL</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // CONTADOR DE DIAS - Começa em 1 e aumenta 1 por dia
-        // Dia 1 = 06/04/2026 (hoje)
-        // Amanhã = 2, depois = 3, etc.
-        const START_DATE = '2026-04-06'; // ALTERE ESTA DATA para definir quando começou (Dia 1)
-        
-        function updateDaysCounter() {
-            const start = new Date(START_DATE);
-            const today = new Date();
+        // BOOT SEQUENCE - Esconde tela de boot após 4 segundos
+        setTimeout(() => {
+            const bootScreen = document.getElementById('boot-screen');
+            const mainContent = document.getElementById('main-content');
             
-            // Calcula diferença em dias
-            const diffTime = today - start;
-            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            bootScreen.style.opacity = '0';
+            bootScreen.style.transition = 'opacity 0.5s ease';
             
-            // +1 para começar em 1 ao invés de 0
-            const dayNumber = diffDays + 1;
-            
-            // Atualiza o número
-            const counterElement = document.getElementById('days-count');
-            counterElement.textContent = dayNumber;
-            
-            // Atualiza o texto (singular/plural)
-            const textElement = document.querySelector('.days-text');
-            if (dayNumber === 1) {
-                textElement.textContent = 'dia programando';
-            } else {
-                textElement.textContent = 'dias programando';
-            }
-        }
-        
-        updateDaysCounter();
-
-        // Efeito de digitação no nome
-        const nameElement = document.getElementById('typewriter-name');
-        const nameText = 'Coffe';
-        let charIndex = 0;
-        
-        function typeWriter() {
-            if (charIndex < nameText.length) {
-                nameElement.textContent += nameText.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeWriter, 150);
-            } else {
-                setInterval(triggerGlitch, 8000);
-            }
-        }
-        
-        function triggerGlitch() {
-            nameElement.classList.add('glitch-active');
             setTimeout(() => {
-                nameElement.classList.remove('glitch-active');
-            }, 300);
-        }
-        
-        setTimeout(typeWriter, 500);
-        
-        // Bio dinâmica
-        const bios = [
-            'Programador Amador',
-            'Platform Destroyer',
-            'Café > Sleep',
-            'if(coffee) { code(); }',
-            '404_sleep_not_found'
-        ];
-        let bioIndex = 0;
-        const bioElement = document.getElementById('dynamic-bio');
-        
-        function rotateBio() {
-            bioElement.classList.add('fade-out');
-            setTimeout(() => {
-                bioIndex = (bioIndex + 1) % bios.length;
-                bioElement.textContent = bios[bioIndex];
-                bioElement.classList.remove('fade-out');
+                bootScreen.style.display = 'none';
+                mainContent.classList.add('show');
+                
+                // Inicia efeitos do conteúdo principal
+                initMainContent();
             }, 500);
-        }
+        }, 4000);
         
-        setInterval(rotateBio, 4000);
-        
-        // Partículas vermelhas
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        let particles = [];
-        const mouse = { x: null, y: null };
-        
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
-            if (Math.random() > 0.8) {
-                particles.push(new Particle());
+        function initMainContent() {
+            // CONTADOR DE DIAS
+            const START_DATE = '2026-04-06';
+            
+            function updateDaysCounter() {
+                const start = new Date(START_DATE);
+                const today = new Date();
+                const diffTime = today - start;
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                const dayNumber = diffDays + 1;
+                
+                const counterElement = document.getElementById('days-count');
+                counterElement.textContent = dayNumber;
+                
+                const textElement = document.querySelector('.days-text');
+                textElement.textContent = dayNumber === 1 ? 'dia programando' : 'dias programando';
             }
-        });
-        
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-        
-        class Particle {
-            constructor() {
-                this.x = mouse.x;
-                this.y = mouse.y;
-                this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 2 - 1;
-                this.speedY = Math.random() * 2 - 1;
-                this.color = `rgba(220, 38, 38, ${Math.random() * 0.5 + 0.2})`;
-                this.life = 100;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.life -= 2;
-                this.size *= 0.95;
-            }
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-        
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-                if (particles[i].life <= 0 || particles[i].size <= 0.1) {
-                    particles.splice(i, 1);
-                    i--;
+            updateDaysCounter();
+
+            // Efeito de digitação no nome
+            const nameElement = document.getElementById('typewriter-name');
+            const nameText = 'Coffe';
+            let charIndex = 0;
+            
+            function typeWriter() {
+                if (charIndex < nameText.length) {
+                    nameElement.textContent += nameText.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, 150);
+                } else {
+                    setInterval(triggerGlitch, 8000);
                 }
             }
-            requestAnimationFrame(animateParticles);
+            
+            function triggerGlitch() {
+                nameElement.classList.add('glitch-active');
+                setTimeout(() => {
+                    nameElement.classList.remove('glitch-active');
+                }, 300);
+            }
+            
+            setTimeout(typeWriter, 500);
+            
+            // Bio dinâmica
+            const bios = [
+                'Programador Amador',
+                'Platform Destroyer',
+                'Café > Sleep',
+                'if(coffee) { code(); }',
+                '404_sleep_not_found'
+            ];
+            let bioIndex = 0;
+            const bioElement = document.getElementById('dynamic-bio');
+            
+            function rotateBio() {
+                bioElement.classList.add('fade-out');
+                setTimeout(() => {
+                    bioIndex = (bioIndex + 1) % bios.length;
+                    bioElement.textContent = bios[bioIndex];
+                    bioElement.classList.remove('fade-out');
+                }, 500);
+            }
+            
+            setInterval(rotateBio, 4000);
+            
+            // Partículas vermelhas
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            let particles = [];
+            const mouse = { x: null, y: null };
+            
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.x;
+                mouse.y = e.y;
+                if (Math.random() > 0.8) {
+                    particles.push(new Particle());
+                }
+            });
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+            
+            class Particle {
+                constructor() {
+                    this.x = mouse.x;
+                    this.y = mouse.y;
+                    this.size = Math.random() * 3 + 1;
+                    this.speedX = Math.random() * 2 - 1;
+                    this.speedY = Math.random() * 2 - 1;
+                    this.color = `rgba(220, 38, 38, ${Math.random() * 0.5 + 0.2})`;
+                    this.life = 100;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    this.life -= 2;
+                    this.size *= 0.95;
+                }
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+                    if (particles[i].life <= 0 || particles[i].size <= 0.1) {
+                        particles.splice(i, 1);
+                        i--;
+                    }
+                }
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+            
+            // Estrelas
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 2 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+            
+            // Efeito 3D no card
+            const card = document.querySelector('.profile-card');
+            document.addEventListener('mousemove', (e) => {
+                const mouseX = e.clientX / window.innerWidth - 0.5;
+                const mouseY = e.clientY / window.innerHeight - 0.5;
+                card.style.transform = `perspective(1000px) rotateY(${mouseX * 5}deg) rotateX(${-mouseY * 5}deg)`;
+            });
         }
-        animateParticles();
-        
-        // Estrelas
-        const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 100; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.width = Math.random() * 2 + 1 + 'px';
-            star.style.height = star.style.width;
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animationDelay = Math.random() * 3 + 's';
-            starsContainer.appendChild(star);
-        }
-        
-        // Efeito 3D no card
-        const card = document.querySelector('.profile-card');
-        document.addEventListener('mousemove', (e) => {
-            const mouseX = e.clientX / window.innerWidth - 0.5;
-            const mouseY = e.clientY / window.innerHeight - 0.5;
-            card.style.transform = `perspective(1000px) rotateY(${mouseX * 5}deg) rotateX(${-mouseY * 5}deg)`;
-        });
     </script>
 </body>
 </html>
